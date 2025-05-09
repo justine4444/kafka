@@ -78,3 +78,96 @@ Kafka allows systems to **produce**, **store**, **process**, and **consume** dat
 
 Kafka enables decoupling of services through durable, distributed messaging with real-time capabilities. It plays a foundational role in modern data engineering systems.
 
+# 📘 Kafka Architecture Overview
+
+This document provides a high-level understanding of Apache Kafka, including its core components and how they interact.
+
+---
+
+## 🔩 Components of Kafka
+
+### 1. **Zookeeper / KRaft**
+- **Zookeeper** (used in Kafka < 2.8) manages:
+  - Broker coordination
+  - Metadata management
+  - Leader election for partitions
+- **KRaft Mode** (Kafka 2.8+) eliminates the need for Zookeeper with a built-in consensus protocol.
+
+---
+
+### 2. **Broker**
+- Kafka **broker** is a server that:
+  - Stores topic **partitions**
+  - Receives messages from **producers**
+  - Serves data to **consumers**
+- A Kafka cluster is made up of **multiple brokers**, each identified by a `broker.id`.
+
+---
+
+### 3. **Topic and Partition**
+- A **topic** is a logical stream of data.
+- Each topic is split into **partitions**:
+  - Ordered, immutable sequences of records.
+  - Partitions enable **horizontal scalability** and **parallel processing**.
+  - Each message has a unique **offset** in the partition.
+  - Kafka guarantees **order only within a partition**.
+
+---
+
+### 4. **Producer**
+- Sends data to Kafka **topics**.
+- Can use **keys** to ensure messages with the same key go to the same partition.
+- Kafka routes messages to the appropriate partition based on:
+  - Round-robin (default)
+  - Hashing the key (if provided)
+
+---
+
+### 5. **Consumer**
+- Reads messages from Kafka topics.
+- Operates as part of a **consumer group**:
+  - Each partition is consumed by only one consumer in the group.
+  - If one consumer fails, Kafka reassigns its partitions to another in the group (fault tolerance).
+
+---
+
+## ⚙️ Kafka Streams
+
+- Kafka Streams is a **stream processing library**.
+- Capabilities:
+  - Read from one or more topics
+  - Perform transformations, filtering, joining, aggregations
+  - Write processed results to other topics
+- Enables **real-time processing pipelines**.
+
+---
+
+## 🔌 Kafka Connect
+
+Kafka Connect is a tool for integrating Kafka with **external systems** using connectors:
+
+### 🔸 Source Connectors
+- Import data from external systems (e.g., MySQL, MongoDB) into Kafka topics.
+
+### 🔸 Sink Connectors
+- Export data from Kafka topics to external systems (e.g., Elasticsearch, S3, PostgreSQL).
+
+---
+
+## 📈 Kafka Data Flow Summary
+
+1. **Producer** → sends data to a topic.
+2. **Broker** → stores topic partitions and handles message flow.
+3. **Consumer Group** → reads data from partitions with auto-rebalancing.
+4. **Kafka Streams** → processes data between topics.
+5. **Kafka Connect** → integrates Kafka with external data sources/destinations.
+
+---
+
+## ✅ Key Benefits of Kafka Architecture
+
+- **Scalable** via partitions and brokers  
+- **Fault-tolerant** through replication  
+- **High throughput** for both reads and writes  
+- **Real-time processing** with Kafka Streams  
+- **Easy integration** with external systems using Kafka Connect  
