@@ -171,3 +171,35 @@ Kafka Connect is a tool for integrating Kafka with **external systems** using co
 - **High throughput** for both reads and writes  
 - **Real-time processing** with Kafka Streams  
 - **Easy integration** with external systems using Kafka Connect  
+
+# Why Kafka is Used in Data Engineering
+
+**Apache Kafka** is an **open-source distributed event streaming platform** widely used in **data engineering** for building **real-time data pipelines** and **streaming applications**. It allows you to **publish, subscribe to, store, and process** streams of records in real time.
+
+---
+
+## ✅ Key Reasons Kafka is Used in Data Engineering
+
+1. **Real-Time Data Ingestion**  
+   Kafka can handle massive volumes of real-time data from various sources (e.g., databases, logs, IoT devices, microservices).
+
+2. **Scalability and Fault Tolerance**  
+   Kafka is designed to be horizontally scalable and provides strong durability and fault tolerance via distributed architecture and data replication.
+
+3. **Decoupling of Systems**  
+   Producers and consumers are decoupled, making systems more modular and easier to evolve.
+
+4. **Durability and Replayability**  
+   Kafka stores streams on disk and allows consumers to replay events, which is vital for debugging, reprocessing, or system recovery.
+
+5. **Integration with Big Data Tools**  
+   Kafka integrates well with tools like **Apache Spark, Flink, Hadoop**, and **Databricks**, making it ideal for ETL and real-time analytics.
+
+6. **Stream Processing Capabilities**  
+   With **Kafka Streams** and **ksqlDB**, Kafka enables lightweight, fault-tolerant stream processing directly on the platform.
+
+---
+
+## ✍️ One-Line Summary
+
+> Kafka is an open-source distributed event streaming platform used in data engineering to build scalable, fault-tolerant real-time data pipelines and streaming applications.
