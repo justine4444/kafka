@@ -203,3 +203,59 @@ Kafka Connect is a tool for integrating Kafka with **external systems** using co
 ## ✍️ One-Line Summary
 
 > Kafka is an open-source distributed event streaming platform used in data engineering to build scalable, fault-tolerant real-time data pipelines and streaming applications.
+
+# Apache Kafka Architecture: Producer, Broker, Consumer
+
+## 🧠 Overview
+
+Apache Kafka is a distributed event streaming platform used to build real-time data pipelines and streaming applications. This document explains the architecture of Kafka focusing on Producers, Brokers, Consumers, Topics, Partitions, Consumer Groups, and Zookeeper.
+
+---
+
+## 🧱 Key Components
+
+### 1. **Producer**
+- Sends messages (records) to **Kafka topics**.
+- Each message can optionally include a **key** that determines which partition it goes to.
+- Uses Kafka client libraries to connect to the Kafka cluster.
+
+### 2. **Topic**
+- A **logical stream or category** of messages (e.g., `orders`, `logs`, `user-events`).
+- A topic is **split into partitions** for scalability and parallelism.
+- Topics themselves are **not stored** anywhere — their **partitions are**.
+
+### 3. **Partition**
+- A **unit of parallelism and storage** within a topic.
+- Messages are **appended** to the end of a partition.
+- Each message in a partition has a unique **offset**.
+- Stored physically on a **Kafka broker**.
+
+### 4. **Broker**
+- A **Kafka server** that stores data and serves client requests.
+- Manages one or more partitions of one or more topics.
+- Handles reads/writes, replication, and partition leadership.
+- Multiple brokers form a **Kafka cluster**.
+
+### 5. **Consumer**
+- Reads data from **topic partitions**.
+- Part of a **consumer group** for load balancing and fault tolerance.
+- Kafka ensures that **each partition is consumed by only one consumer** in the group at a time.
+
+### 6. **Consumer Group**
+- A group of consumers that **share the load** of reading from a topic.
+- If one consumer fails, another in the group can take over the partitions.
+- Enables **scalable and fault-tolerant** message processing.
+
+### 7. **Zookeeper (Legacy)**
+- Coordinates and manages metadata such as:
+  - Broker registration
+  - Leader election for partitions
+  - Configuration management
+- Kafka is moving toward a **KRaft (Kafka Raft)** mode to remove dependency on Zookeeper.
+
+---
+
+## 🔁 Data Flow Summary
+
+```text
+Producer → Topic → Partition → Broker → Consumer
