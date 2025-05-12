@@ -259,3 +259,58 @@ Apache Kafka is a distributed event streaming platform used to build real-time d
 
 ```text
 Producer → Topic → Partition → Broker → Consumer
+
+# Kafka Topics and Partitions
+
+## 🧵 Topics
+
+- A **Kafka topic** is a named stream of messages.
+- **Producers** send (write) messages to a topic.
+- **Consumers** read messages from a topic.
+- Topics are used to logically separate different categories of data (e.g., `orders`, `logs`, `payments`).
+
+## 🧩 Partitions
+
+- Each topic is divided into one or more **partitions**.
+- A **partition** is:
+  - An ordered, immutable sequence of messages.
+  - Each message in a partition has a unique **offset**.
+- Partitions allow Kafka to:
+  - Scale horizontally.
+  - Distribute load across multiple **brokers**.
+
+## 🏭 Producer Behavior
+
+- Producers send messages to a specific **topic**.
+- Kafka determines which **partition** a message goes to by:
+  - A **partition key** (e.g., user ID) if provided.
+  - **Round-robin** if no key is specified.
+- This ensures either:
+  - Order preservation for a given key.
+  - Balanced distribution across partitions.
+
+## 👥 Consumer Behavior
+
+- **Consumer groups** allow for parallel processing.
+- Kafka assigns **partitions to consumers** within a group.
+  - One consumer reads from one or more partitions.
+  - A single partition is assigned to only **one consumer** in the group.
+- **Ordering is guaranteed within a partition**, but not across partitions.
+
+## 🖥️ Brokers and Partition Management
+
+- Kafka **brokers** host partitions and handle:
+  - Message storage.
+  - Message delivery.
+  - Replication and fault tolerance.
+- Each partition has:
+  - A **leader broker** that handles reads and writes.
+  - **Follower brokers** that replicate the data for redundancy.
+
+## 📝 Summary
+
+- A topic is a logical channel to send and receive messages.
+- Each topic is divided into partitions for scalability and parallelism.
+- Producers write to topics (and indirectly to partitions).
+- Consumers read from assigned partitions.
+- Kafka brokers manage partitions and ensure high availability and consistency.
