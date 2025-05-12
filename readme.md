@@ -314,3 +314,46 @@ Producer → Topic → Partition → Broker → Consumer
 - Producers write to topics (and indirectly to partitions).
 - Consumers read from assigned partitions.
 - Kafka brokers manage partitions and ensure high availability and consistency.
+
+# Kafka Logs and Data Storage
+
+## 📦 How Kafka Stores Data
+
+- Kafka organizes data into **topics**.
+- Each topic is divided into **partitions**.
+- Each partition is implemented as a **log** — an ordered, append-only file stored on disk.
+
+## 📄 Kafka Log Structure
+
+- Messages are written sequentially to the end of the log.
+- Each message in a partition has:
+  - A unique **offset** (used to identify and retrieve messages).
+  - A **key** (optional) — used for partitioning and message routing.
+  - A **value** — the main payload.
+  - A **timestamp** — indicating when the message was produced.
+
+## 🕒 Retention and Segments
+
+- Kafka retains messages for a configured time (e.g., 7 days), regardless of whether they've been consumed.
+- Logs are split into **segments** to optimize disk usage and cleanup.
+- Old segments are deleted or compacted based on topic configurations.
+
+## 🔄 Offset-Based Consumption
+
+- **Consumers manage their own offsets**, allowing:
+  - Message reprocessing (by rewinding offsets).
+  - Parallelism across consumer groups.
+- Kafka itself does not track message consumption status.
+
+## 🚀 Performance
+
+- Kafka achieves high performance through:
+  - **Sequential disk I/O**.
+  - **Zero-copy transfer**.
+  - Efficient batching and compression.
+
+## ✅ Summary
+
+- Kafka stores data in **logs** within **partitions** of **topics**.
+- Each message is assigned a unique **offset** and optionally includes a key and timestamp.
+- Consumers control message consumption using **offsets**, enabling replay and fault tolerance.
